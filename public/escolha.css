@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0e2133;
+    --secondary-color: #acccdc;
+}
+
+body {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    background-color: var(--secondary-color);
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Responsivo */
+header {
+    background-color: #f9f9f9;
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header .logo h1 {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.logo {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+}
+
+.logo2, .logo3 {
+    display: none;
+    width: 50px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo2 {
+    left: 10px;
+}
+
+.logo3 {
+    right: 10px;
+}
+
+.logo4 {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+}
+
+/* Navegação Responsiva */
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px 10px;
+    background-color: var(--primary-color);
+    gap: 10px;
+}
+
+nav a, nav ul li a {
+    color: #f9f9f9;
+    text-decoration: none;
+    padding: 5px 10px;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+/* Formulário Responsivo */
+form .botao {
+    padding: 12px 24px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px auto;
+    display: block;
+}
+
+/* Dashboard Responsivo */
+.dashboard {
+    display: block;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+    margin-top: 20px;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.stat-card .stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.stat-card .stat-desc {
+    color: #666;
+    font-size: 12px;
+}
+
+/* Botão Responsivo */
+.botao {
+    display: inline-block;
+    padding: 15px 10px;
+    background-color: var(--primary-color);
+    color: aliceblue;
+    border-radius: 10px;
+    margin: 20px;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+    width: calc(100% - 30px);
+    max-width: 200px;
+}
+
+/* Footer Responsivo */
+footer {
+    text-align: center;
+    background-color: var(--primary-color);
+    color: #f9f9f9;
+    padding: 20px 10px;
+    margin-top: 200px;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+/* Media Queries para Responsividade */
+
+/* Tablets (768px) */
+@media (min-width: 768px) {
+    header {
+        flex-direction: row;
+        justify-content: center;
+        padding: 10px 20px;
+    }
+    
+    .logo2, .logo3 {
+        display: block;
+        width: 65px;
+    }
+    
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    nav {
+        padding: 15px 20px;
+        gap: 20px;
+    }
+    
+    .botao {
+        margin: 20px;
+        width: auto;
+    }
+}
+
+/* Laptops (992px) */
+@media (min-width: 992px) {
+    .stats-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .stat-card {
+        padding: 20px;
+        margin-top: 30px;
+    }
+    
+    .stat-card .stat-value {
+        font-size: 28px;
+    }
+    
+    header {
+        padding: 10px 40px;
+    }
+    
+    .logo2, .logo3 {
+        width: 75px;
+    }
+}
+
+/* Telas Grandes (1200px) */
+@media (min-width: 1200px) {
+    .dashboard {
+        padding: 0;
+    }
+    
+    .stats-container {
+        gap: 25px;
+    }
+}

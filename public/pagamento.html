@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet
+    <link rel="stylesheet" href="pag.css">
+    <script src="pag.js"></script>
+
+</head>
+<body>
+    <header>
+         <img class="logo" src="imagens/logoo.png">
+         <img class="logo2" src="imagens/ccmts.jfif">
+         <img class="logo3" src="imagens/parana.png">
+    </header>
+    <nav></nav>
+    <main>
+        
+    <div id="main-container">
+        <h1>Relatórios de Pagamentos</h1>
+        <form class="pagamentos" id="formPagamento">
+
+            <div class="full-box">
+                <label for="codigo">Código</label>
+                <input type="text" id="codigo" maxlength="11" placeholder="Digite o Código do cliente" />
+            </div>
+            <div class="half-box">
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" name="valor" placeholder="Digite o valor do pagamento" required>
+            </div>
+            <div class="half-box">
+                <label for="dataPagamento">Data de Pagamento:</label>
+                <input type="date" id="dataPagamento" name="dataPagamento" placeholder="Digite a data" required>
+            </div>
+            <div class="full-box">
+                <label for="formaPagamento">forma de pagamento:</label>
+                <input type="text" id="formaPagamento" name="formaPagamento" placeholder="Digite a forma de pagamento" required>
+            </div>
+
+
+   </form>
+    <div class="container_botoes">
+            <button class="botao1" onclick="incluirPagamento(event)">Incluir</button>
+            <button class="botao2" onclick="excluirPagamento()">Excluir</button>
+            <button class="botao3" onclick="alterarPagamento()">Alterar</button>
+            <button class="botao4" onclick="consultarPagamento()">Consultar</button>
+            <button class="botao5" onclick="limpaFormulario()">Limpar</button>
+         </div>
+      </section>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Valor</th>
+                    <th>DigiteData</th>
+                    <th>Formapagamento</th>
+                </tr>
+            </thead>
+            <tbody id="tabela-pagamento">
+                <!-- Linhas serão preenchidas pelo JavaScript -->
+            </tbody>
+        </table>
+
+        </div>
+        <button class="botao5" onclick="voltarParaCadastro()">Voltar</button>
+          </section>
+        </main>
+    
+    <footer>
+         <img class="logo4" src="imagens/gimc2.png">
+         <P>&COPY; 2025-Todos os direitos reservados.</P>
+    </footer>
+
+
+</body>
+</html

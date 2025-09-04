@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #acccdc;
+  color: #333;
+}
+
+header {
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 0px;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+header .logo h1 {
+  margin: 0;
+  padding: 10px;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+}
+
+.logo2 {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.logo3 {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.logo4 {
+  width: 200px;
+  height: auto;
+}
+
+section {
+  margin: 30px auto;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: left;
+  align-items: start;
+  margin-top: 20px
+}
+
+form input {
+  min-width: 500%;
+  padding: 7px;
+  font-size: 16px;
+  border: 1px solid #0e2133;
+  border-radius: 5px;
+  margin-top: 20px
+}
+
+footer {
+  text-align: center;
+  background-color: #0e2133;
+  color: #f9f9f9;
+  padding: 40px;
+  margin-top: 110px;
+}
+
+footer p {
+  font-size: 14px;
+}
+
+nav {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0e2133;
+}
+
+nav a {
+  margin: 0 15px;
+  color: #f9f9f9;
+  text-decoration: none;
+}
+
+.botao1,
+.botao2,
+.botao3,
+.botao4,
+.botao5 {
+  border-radius: 7px;
+  margin-top: 10px;
+  border: none;
+  width: 87px;
+  height: 25px;
+  color: #ffffff;
+  background-color: #0e2133;
+  cursor: pointer;
+}
+
+.container_botoes {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="mov.css">
+    <script src="mov.js"></script>
+  <title>Movimento do Dia</title>
+</head>
+<body>
+   <header>
+     <img class="logo" src="imagens/logoo.png" alt="Logo Academia">
+   </header>
+  <nav></nav>
+  <main>
+    <div id="main-container">
+      <h1>Movimento do Dia</h1>
+      <form class="Movimento" id="formMovimento">
+          <div class="full-box">
+          <label for="codigo">Codigo do Cliente:</label>
+          <input type="text" id="codigo" name="codigo" placeholder="Digite o codigo do cliente" required>
+          </div>
+          <div class="full-box">
+          <label for="horarioE">Horario de Entrada:</label>
+          <input type="text" id="horarioE" name="horarioE" placeholder="Digite o horario da entrada" required>
+          </div>
+          <div class="half-box">
+          <label for="horarioS">Horario de Saida:</label>
+          <input type="number" id="horarioS" name="horarioS" placeholder="horarioS" required>
+          </div>
+        
+          <div class="container_botoes">
+            <button class="botao1"onclick="incluirmovimento(event)">Incluir</button>
+            <button class="botao2"onclick="excluirFrequencia()">Excluir</button>
+            <button class="botao3"onclick="alterarmovimento()">Alterar</button>
+            <button class="botao4"onclick="consultarmovimento()">Consultar</button>
+            <button class="botao5" onclick="limpaFormulario()">Limpar</button>
+            </div>
+      </section> 
+
+            <h3>Registros de Frequência</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Horario de Entrada</th>
+                        <th>Horario de Saida</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabela-movimento">
+                    <!-- Os dados serão inseridos aqui via JavaScript -->
+                </tbody>
+              </table>
+            </div>
+            <button class="botao5" onclick="voltarParaCadastro()">Voltar</button>
+          </section>
+    </main>
+
+   <footer>
+       <img class="logo4" src="imagens/gimc2.png"
+           <p>2025 - Todos os direitos reservados</p>
+   </footer>
+</body>
+</html>

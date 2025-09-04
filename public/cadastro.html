@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Clientes</title>
+    <link rel="stylesheet" href="cadastro.css">
+    <script src="cadastro.js"></script>
+
+</head>
+<body>
+  <header>
+    <img class="logo" src="imagens/logoo.png">
+     <img class="logo2" src="imagens/ccmts.jfif">
+     <img class="logo3" src="imagens/parana.png">
+  </header>
+<nav></nav>
+<main>
+
+<div id="main-container">
+    <h1>Cadastro de Cliente</h1>
+    <form class="Cadastro" id="formCliente">
+        <div class="full-box">
+            <label for="codigo">Código</label>
+            <input type="text" id="codigo" maxlength="11" placeholder="Digite o Código" />
+        </div>
+        <div class="full-box">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite o nome completo" required>
+        </div>
+        <div class="half-box">
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" placeholder="Digite a idade" required>
+        </div>
+        <div class="half-box">
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" placeholder="Digite o telefone" required>
+        </div>
+        <div class="half-box">
+            <label for="emergencia">nº de emergência:</label>
+            <input type="text" id="emergencia" name="emergencia" placeholder="Digite o nº de emergência" required>
+        </div>
+        <div class="half-box">
+            <label for="endereco">Endereço:</label>
+            <input type="text" id="endereco" name="endereco" placeholder="Digite o endereço" required>
+        </div>
+        <div class="half-box">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Digite o e-mail" required>
+        </div>
+        <div class="half-box">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" placeholder="Digite o CPF" required>
+            </div>
+     </form>
+    <div class="container_botoes">
+            <button class="botao1" onclick="incluirCliente(event)">Incluir</button>
+            <button class="botao2" onclick="excluirCliente()">Excluir</button>
+            <button class="botao3" onclick="alterarCliente()">Alterar</button>
+            <button class="botao4" onclick="consultarClientes()">Consultar</button>
+            <button class="botao5" onclick="limpaFormulario()">Limpar</button>
+         </div>
+      </section>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Endereço</th>
+                <th>Idade</th>
+                <th>Emergência</th>   
+            </tr>
+        </thead>
+        <tbody id="tabela-clientes">
+            <!-- Linhas serão preenchidas pelo JavaScript -->
+        </tbody>
+    </table>
+
+ </div>
+    <button class="botao5" onclick="voltarParaCadastro()">Voltar</button>
+      </section>
+    </main>
+
+
+<footer>
+    <img class="logo4" src="imagens/gimc2.png">
+     <p>2025 - Todos os direitos reservados</p>
+</footer>
+</body>
+</html>

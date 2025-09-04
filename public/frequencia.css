@@ -1,0 +1,449 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #acccdc;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 0px;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.logo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+}
+
+
+main {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#frequencia {
+    background-color: #ffffff;
+    padding: 85px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.frequencia-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.container_botoes {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 90px;
+}
+
+button, .botao5 {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    text-decoration: none;
+    color: white;
+}
+
+.botao { background-color: #0e2133; }
+.botao2 { background-color: #0e2133; }
+.botao3 { background-color: #0e2133; }
+.botao4 { background-color: #0e2133; }
+.botao5 { background-color: #0e2133; }
+button:hover {
+    opacity: 0.9;
+}
+
+.resultados-container {
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+footer {
+    text-align: center;
+    background-color: #0e2133;
+    color: #f9f9f9;
+    padding: 40px;
+    margin-top: 110px;
+}
+
+footer p {
+    font-size: 20px;
+}
+
+nav {
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #0e2133;
+    .btn-editar, .btn-excluir {
+        padding: 5px 10px;
+        margin: 0 3px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .btn-editar {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    .btn-excluir {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-editar:hover {
+        background-color: #45a049;
+    }
+
+    .btn-excluir:hover {
+        background-color: #d32f2f;
+    }
+
+}
+
+nav a {
+    margin: 0 15px;
+    color: #f9f9f9;
+    text-decoration: none;
+}
+.logo4 {
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.btn-editar, .btn-excluir {
+    padding: 5px 10px;
+    margin: 0 3px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-editar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-excluir {
+    background-color: #f44336;
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: #45a049;
+}
+
+.btn-excluir:hover {
+    background-color: #d32f2f;
+}
+
+#tabelaFrequencia th:nth-child(5),
+#tabelaFrequencia td:nth-child(5) {
+    text-align: center;
+}
+
+#tabelaFrequencia {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tabelaFrequencia th, 
+#tabelaFrequencia td {
+    border:1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#tabelaFrequencia th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+#tabelaFrequencia tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#tabelaFrequencia tr:hover {
+    background-color: #f1f1f1;
+}
