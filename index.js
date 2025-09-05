@@ -90,6 +90,18 @@ db.serialize(() => {
     )
     `);
 
+    db.run(`
+        CREATE TABLE IF NOT EXISTS planos_treino (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            codigo VARCHAR(10) UNIQUE,
+            nome VARCHAR(100) NOT NULL,
+            categoria VARCHAR(50) NOT NULL,
+            duracao INTEGER NOT NULL,
+            exercicios TEXT NOT NULL,
+            observacoes TEXT
+        )
+    `);
+
 
     console.log("Tabelas criadas com sucesso.");
 });
@@ -572,6 +584,116 @@ app.put("/cargo/codigo/:codigo", (req, res) => {
              res.send("movimento atualizado com sucesso.");
          });                                                                                    
      });
+
+
+//////////////////////////// Rotas para Planos de Treino /////////////////////////////
+///////////////////////////// Rotas para Planos de Treino /////////////////////////////
+///////////////////////////// Rotas para Planos de Treino /////////////////////////////
+
+// Cadastrar plano de treino
+app.post("/planos_treino", (req, res) => {
+    const { codigo, nome, categoria, duracao, exercicios, observacoes } = req.body;
+
+    if (!codigo || !nome || !categoria || !duracao || !exercicios) {
+        return res.status(400).json({ message: "Código, nome, categoria, duração e exercícios são obrigatórios." });
+    }
+
+    const query = `INSERT INTO planos_treino (codigo, nome, categoria, duracao, exercicios, observacoes) VALUES (?, ?, ?, ?, ?, ?)`;
+    db.run(
+        query,
+        [codigo, nome, categoria, duracao, exercicios, observacoes || ''],
+        function (err) {
+            if (err) {
+                if (err.message.includes('UNIQUE constraint failed')) {
+                    return res.status(400).json({ message: "Código do plano já existe." });
+                }
+                return res.status(500).json({ message: "Erro ao cadastrar plano." });
+            }
+            res.status(201).json({
+                id: this.lastID,
+                message: "Plano cadastrado com sucesso.",
+            });
+        }
+    );
+});
+
+// Listar planos de treino (todos ou por código)
+app.get("/planos_treino", (req, res) => {
+    const codigo = req.query.codigo;
+
+    if (codigo) {
+        const query = `SELECT * FROM planos_treino WHERE codigo = ?`;
+        db.all(query, [codigo], (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: "Erro ao buscar planos de treino." });
+            }
+            res.json(rows);
+        });
+    } else {
+        const query = `SELECT * FROM planos_treino ORDER BY categoria, nome`;
+        db.all(query, (err, rows) => {
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ message: "Erro ao buscar planos de treino." });
+            }
+            res.json(rows);
+        });
+    }
+});
+
+// Buscar planos por categoria
+app.get("/planos_treino/categoria/:categoria", (req, res) => {
+    const { categoria } = req.params;
+
+    const query = `SELECT * FROM planos_treino WHERE categoria = ? ORDER BY nome`;
+    db.all(query, [categoria], (err, rows) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Erro ao buscar planos por categoria." });
+        }
+        res.json(rows);
+    });
+});
+
+// Atualizar plano de treino
+app.put("/planos_treino/codigo/:codigo", (req, res) => {
+    const { codigo } = req.params;
+    const { nome, categoria, duracao, exercicios, observacoes } = req.body;
+
+    if (!nome || !categoria || !duracao || !exercicios) {
+        return res.status(400).json({ message: "Nome, categoria, duração e exercícios são obrigatórios." });
+    }
+
+    const query = `UPDATE planos_treino SET nome = ?, categoria = ?, duracao = ?, exercicios = ?, observacoes = ? WHERE codigo = ?`;
+    db.run(query, [nome, categoria, duracao, exercicios, observacoes || '', codigo], function (err) {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Erro ao atualizar plano de treino." });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ message: "Plano de treino não encontrado." });
+        }
+        res.json({ message: "Plano de treino atualizado com sucesso." });
+    });
+});
+
+// Excluir plano de treino
+app.delete("/planos_treino/codigo/:codigo", (req, res) => {
+    const { codigo } = req.params;
+
+    const query = `DELETE FROM planos_treino WHERE codigo = ?`;
+    db.run(query, [codigo], function (err) {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Erro ao excluir plano de treino." });
+        }
+        if (this.changes === 0) {
+            return res.status(404).json({ message: "Plano de treino não encontrado." });
+        }
+        res.json({ message: "Plano de treino excluído com sucesso." });
+    });
+});
 
 
             // Teste para verificar se o servidor está rodando
