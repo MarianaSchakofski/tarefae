@@ -103,11 +103,12 @@ footer p {
 }
 
 nav {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  background-color: #0e2133;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    background-color: #0e2133;
+    margin-top: 20px;
 }
 
 nav a {
