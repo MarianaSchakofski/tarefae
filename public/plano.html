@@ -1,1 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planos de Treino</title>
+    <link rel="stylesheet" href="plano.css">
+    <script src="plano.js" defer></script>
+</head>
+<body>
+    <header>
+        <img class="logo" src="imagens/logoo.png" alt="Logo">
+        <img class="logo2" src="imagens/ccmts.jfif" alt="Logo2">
+        <img class="logo3" src="imagens/parana.png" alt="Logo3">
+    </header>
 
+    <main>
+        <h1>Planos de Treino</h1>
+
+        <form id="formPlanoTreino">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="codigo">Código do Plano:</label>
+                    <input type="text" id="codigo" name="codigo" placeholder="Código do plano" required>
+                </div>
+                <div class="form-group">
+                    <label for="nome">Nome do Plano:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Nome do plano" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="Iniciante">Iniciante</option>
+                        <option value="Intermediário">Intermediário</option>
+                        <option value="Avançado">Avançado</option>
+                        <option value="Emagrecimento">Emagrecimento</option>
+                        <option value="Hipertrofia">Hipertrofia</option>
+                        <option value="Reabilitação">Reabilitação</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="duracao">Duração (semanas):</label>
+                    <input type="number" id="duracao" name="duracao" placeholder="Duração em semanas" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="exercicios">Exercícios (separados por vírgula):</label>
+                <textarea id="exercicios" name="exercicios" placeholder="Lista de exercícios" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" placeholder="Observações adicionais"></textarea>
+            </div>
+        </form>
+
+        <div class="container_botoes">
+            <button class="botao1" onclick="incluirPlano(event)">Incluir</button>
+            <button class="botao2" onclick="excluirPlano()">Excluir</button>
+            <button class="botao3" onclick="alterarPlano()">Alterar</button>
+            <button class="botao4" onclick="consultarPlanos()">Consultar</button>
+            <button class="botao5" onclick="limpaFormulario()">Limpar</button>
+        </div>
+
+        <div id="planos-container">
+            <!-- Os planos serão inseridos aqui pelo JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <img class="logo4" src="imagens/gimc2.png" alt="Logo4">
+        <p>2025 - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
