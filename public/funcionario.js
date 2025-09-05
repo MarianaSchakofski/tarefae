@@ -11,7 +11,6 @@ async function incluirfuncionario(event) {
         idade: document.getElementById("idade").value,
         cargo_id: parseInt(document.getElementById("cargoselecionado").value)
     };
-    alert('cargo_id');
 
     try {
         const response = await fetch('/funcionario', {
@@ -160,6 +159,6 @@ function abrirCargo() {
 
 // Função para voltar
 function voltarpagina() {
-    window.location.href = 'index.html';
+    window.location.href = 'escolha.html';
 }
 
