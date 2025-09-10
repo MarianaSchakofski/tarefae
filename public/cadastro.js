@@ -1,8 +1,5 @@
 async function incluirCliente(event) {
     event.preventDefault();
-    
-
-
     const cliente = {
         codigo: document.getElementById("codigo").value,
         nome: document.getElementById("nome").value,
@@ -132,4 +129,8 @@ async function limpaFormulario() {
     document.getElementById('endereco').value = '';
     document.getElementById('email').value = '';
     document.getElementById('cpf').value = '';
+}
+// Função para voltar
+function voltarpagina() {
+    window.location.href = 'escolha.html';
 }
