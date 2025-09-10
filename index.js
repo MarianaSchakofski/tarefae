@@ -82,13 +82,15 @@ db.serialize(() => {
         `);
     
     db.run(`
-    CREATE TABLE IF NOT EXISTS movimento (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     codigo VARCHAR(10),
-     horarioE VARCHAR(100) NOT NULL,
-     horarioS INTEGER
-    )
+        CREATE TABLE IF NOT EXISTS movimento (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            codigo VARCHAR(10) NOT NULL,
+            horarioE VARCHAR(100) NOT NULL,
+            horarioS VARCHAR(100),
+            data DATE DEFAULT CURRENT_DATE
+        )
     `);
+
 
     db.run(`
         CREATE TABLE IF NOT EXISTS planos_treino (
@@ -508,82 +510,53 @@ app.put("/cargo/codigo/:codigo", (req, res) => {
     });
 });
 
+// ==============================================
+// ROTAS PARA MOVIMENTO DO MÊS
+// ==============================================
 
 
-////////////////////////////rotas para movimento////////////////////////////////
- // Cadastrar movimento
-     app.post("/movimento", (req, res) =>{
-         const { codigo, horarioE, horarioS } =
-                 req.body;    
+// Buscar cliente por código
+app.get("/clientes/codigo/:codigo", (req, res) => {
+    const { codigo } = req.params;
+    const query = `SELECT * FROM clientes WHERE codigo = ?`;
 
-         if (!codigo || !horarioE){
-             return res.status(400).send("codigo e horarioE são obrigatórios.");
-         }
-         const query = `INSERT INTO movimento (codigo, horarioE, horarioS) VALUES (?, ?, ?)`;
-         db.run(
-             query,
-             [codigo, horarioE, horarioS],
-             function (err){
-                 if (err) {
-                     return res.status(500).send("Erro ao cadastrar movimento.");
-                 }
-                 res.status(201).send({
-                     id: this.lastID,
-                     message: "movimento cadastrado com sucesso.",
-                 });
-             },
-        );
+    db.get(query, [codigo], (err, row) => {
+        if (err) {
+            return res.status(500).json({ message: "Erro ao buscar cliente." });
+        }
+        if (!row) {
+            return res.status(404).json({ message: "Cliente não encontrado." });
+        }
+        res.json(row);
     });
+});
 
-     // Listar movimento
-     // Endpoint para listar todos os movimento ou buscar por codigo
-     app.get("/movimento", (req, res) =>{
-         const codigo = req.query.codigo || ""; // Recebe o codigo da query string (se houver)
+// Buscar movimentos do mês
+app.get("/movimento/mes", (req, res) => {
+    const { codigo, mes, ano } = req.query;
 
-         if (codigo){
-             // Se codigo foi passado, busca movimento que possuam esse codigo ou parte dele    
-             const query = `SELECT * FROM movimento WHERE codigo LIKE ?`;
-             db.all(query, [`%${codigo}%`], (err, rows) =>{
-                 if (err){
-                     console.error(err);
-                     return res
-                         .status(500)
-                         .json({ message: "Erro ao buscar movimento." });
-                 }
-                 res.json(rows); // Retorna os movimento encontrados ou um array vazio
-         });
-     } else{
-         // Se codigo não foi passado, retorna todos os movimento
-         const query = `SELECT * FROM movimento`;
+    if (!codigo || !mes || !ano) {
+        return res.status(400).json({ message: "Código, mês e ano são obrigatórios." });
+    }
 
-         db.all(query, (err, rows) =>{
-             if (err){
-                 console.error(err);
-                 return res
-                     .status(500)
-                     .json({ message: "Erro ao buscar movimento." });
-             }
-             res.json(rows); // Retorna todos os movimento
-            }
-        )};
+    const dataInicio = `${ano}-${mes.padStart(2, '0')}-01`;
+    const ultimoDia = new Date(ano, mes, 0).getDate();
+    const dataFim = `${ano}-${mes.padStart(2, '0')}-${ultimoDia}`;
+
+    const query = `
+        SELECT * FROM movimento 
+        WHERE codigo = ? 
+        AND date(data) BETWEEN ? AND ?
+        ORDER BY data, horarioE
+    `;
+
+    db.all(query, [codigo, dataInicio, dataFim], (err, rows) => {
+        if (err) {
+            return res.status(500).json({ message: "Erro ao buscar movimentos." });
+        }
+        res.json(rows);
     });
-
-     // Atualizar movimento
-     app.put("/movimento/codigo/:codigo", (req, res) =>{
-         const { codigo } = req.params;
-         const { horarioE, horarioS } = req.body;
-         
-         const query = `UPDATE movimento SET horarioE = ?, horarioS = ?, WHERE codigo = ?`;
-         db.run(query, [codigo, horarioE, horarioS], function (err){
-             if (err){
-                 return res.status(500).send("Erro ao atualizar movimento.");
-             }
-             if (this.changes === 0){
-                 return res.status(404).send("movimento não encontrado.");
-             }
-             res.send("movimento atualizado com sucesso.");
-         });                                                                                    
-     });
+});
 
 
 //////////////////////////// Rotas para Planos de Treino /////////////////////////////
