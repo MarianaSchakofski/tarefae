@@ -1,84 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movimento do Mês</title>
+    <title>Relatorio de Clientes</title>
     <link rel="stylesheet" href="mov.css">
     <script src="mov.js"></script>
-</head>
-<body>
-    <header>
-        <img class="logo" src="imagens/logoo.png" alt="Logo Academia">
-    </header>
-    
-    <main>
-        <div id="main-container">
-            <h1>Movimento do Mês</h1>
-            
-            <div class="search-container">
-                <label for="pesquisa-codigo">Código do Cliente:</label>
-                <input type="text" id="pesquisa-codigo" placeholder="Digite o código">
-                <button onclick="pesquisarMovimento()">Pesquisar</button>
+    </head>
+    <body>
+        <header>
+             <img class="logo" src="imagens/logoo.png">
+             <img class="logo2" src="imagens/ccmts.jfif">
+             <img class="logo3" src="imagens/parana.png">
+        </header>
+        <nav></nav>
+        <main>
+            <section>
+            <div class="form-container">
+                <h1>Relatorio de Clientes</h1>
+                <form id="search-form">
+                    <div class="input-group">
+                        <label for="search">Pesquisar Cliente:</label>
+                        <input type="text" id="search" placeholder="Digite o nome ou ID do cliente" autocomplete="off">
+                    </div>
+                    <div class="container_botoes">
+                        <button type="submit" class="botao1">Pesquisar</button>
+                    </div>
+                </form>
             </div>
 
-            <div class="month-selector">
-                <label for="selecionar-mes">Mês:</label>
-                <select id="selecionar-mes">
-                    <option value="1">Janeiro</option>
-                    <option value="2">Fevereiro</option>
-                    <option value="3">Março</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Maio</option>
-                    <option value="6">Junho</option>
-                    <option value="7">Julho</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Setembro</option>
-                    <option value="10">Outubro</option>
-                    <option value="11">Novembro</option>
-                    <option value="12">Dezembro</option>
-                </select>
-                
-                <label for="selecionar-ano">Ano:</label>
-                <select id="selecionar-ano">
-                    <option value="2024">2024</option>
-                    <option value="2025" selected>2025</option>
-                </select>
+            <div id="result-container" class="resposta-container" style="display: none;">
+                <!-- Os resultados serão exibidos aqui -->
             </div>
-
-            <div class="client-info" id="info-cliente">
-                <h3>Dados do Cliente</h3>
-                <p><strong>Nome:</strong> <span id="cliente-nome">-</span></p>
-            </div>
-
-            <div class="resumo-mensal" id="resumo-mensal">
-                <h3>Resumo do Mês</h3>
-                <p><strong>Total de Dias:</strong> <span id="total-dias">0</span></p>
-            </div>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Entrada</th>
-                        <th>Saída</th>
-                    </tr>
-                </thead>
-                <tbody id="tabela-movimento-mes">
-                    <tr><td colspan="3">Nenhum movimento encontrado</td></tr>
-                </tbody>
-            </table>
-
-            <div class="container_botoes">
-                <button class="botao5" onclick="voltarParaCadastro()">Voltar</button>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer>
-        <p>2025 - Todos os direitos reservados</p>
+        <img class="logo4" src="imagens/gimc2.png">
+         <p>2025 - Todos os direitos reservados</p>
     </footer>
-
-    <script src="movimento-mes.js"></script>
+        
 </body>
 </html>
