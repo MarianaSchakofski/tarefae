@@ -32,7 +32,27 @@ async function incluirfrequencia(event) {
      }
  }
 
-
+function buscarcodigo() {
+    fetch('/buscar-codigo')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao buscar codigo');
+            }
+            return response.json();
+        })
+        .then(servicos => {
+            const select = document.getElementById('codigoselecionado');
+            servicos.forEach(servico=> {
+                const option = document.createElement('option');
+                option.value = servico.id; // Usa o id como valor
+                option.textContent = servico.nome; // Nome do serviço exibido
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar os clientes:', error);
+        });
+}
 
  // Função para listar todos os clientes ou buscar clientes por CPF
  async function consultarfrequencia() {
