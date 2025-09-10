@@ -151,7 +151,7 @@ nav a:hover {
     color: #4a90e2;
 }
 
-.botao1, .botao2, .botao3, .botao4, .botao5 {
+.botao, .botao1, .botao2, .botao3, .botao4, .botao5 {
     border-radius: 7px;
     border: none;
     width: 120px; /* Mais largo */
