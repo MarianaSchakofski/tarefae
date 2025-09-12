@@ -68,36 +68,47 @@ async function consultarcargo() {
 }
 // Função para atualizar as informações do funcionario
 async function alterarcargo() {
-      const codigo = document.getElementById("codigo").value;
-      const codigofun = document.getElementById("codigofun").value;
-      const funcao = document.getElementById("funcao").value;
+    const codigo = document.getElementById("codigo").value.trim();
+    const codigofun = document.getElementById("codigofun").value.trim();
+    const funcao = document.getElementById("funcao").value.trim();
 
-  const cargoAtualizado = {
-      codigo,
-      codigofun,
-      funcao
-  };
+    // Validação básica
+    if (!codigo || !codigofun || !funcao) {
+        alert('Todos os campos são obrigatórios para alteração!');
+        return;
+    }
 
-  try {
-      const response = await fetch(`/cargo/codigo/${codigo}`, {
-          method: 'PUT',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(cargoAtualizado)
-      });
+    const cargoAtualizado = {
+        codigo,
+        codigofun,
+        funcao
+    };
 
-      if (response.ok) {
-          alert('Cargo atualizado com sucesso!');
-      } else {
-          const errorMessage = await response.text();
-          alert('Erro ao atualizar cargo: ' + errorMessage);
-      }
-  } catch (error) {
-      console.error('Erro ao atualizar cargo:', error);
-      alert('Erro ao atualizar cargo.');
-  }
+    try {
+        const response = await fetch(`/cargo/codigo/${codigo}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(cargoAtualizado)
+        });
+
+        if (response.ok) {
+            alert('Cargo atualizado com sucesso!');
+            // Atualiza a tabela após alteração
+            consultarcargo();
+            // Limpa o formulário se desejar
+            limpaFormulario();
+        } else {
+            const errorMessage = await response.text();
+            alert('Erro ao atualizar cargo: ' + errorMessage);
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar cargo:', error);
+        alert('Erro ao atualizar cargo. Verifique a conexão.');
+    }
 }
+
 async function limpaFormulario() {
   document.getElementById('codigo').value ='';
   document.getElementById('codigofun').value = '';
