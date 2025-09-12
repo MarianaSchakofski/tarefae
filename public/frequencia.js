@@ -93,13 +93,18 @@ function buscarcodigo() {
  }
  // Função para atualizar as informações do cliente
  async function alterarfrequencia() {
-     const codigo = document.getElementById('codigo').value;
-     const nome = document.getElementById('nome').value;
-     const treinos = document.getElementById('treinos').value;
-     const faltas = document.getElementById('faltas').value;
-     
+     const codigo = document.getElementById('codigo').value.trim();
+     const nome = document.getElementById('nome').value.trim();
+     const treinos = document.getElementById('treinos').value.trim();
+     const faltas = document.getElementById('faltas').value.trim();
 
-     const frequencia = {
+     // Validação básica
+     if (!codigo || !nome) {
+         alert('Código e nome são obrigatórios para alteração!');
+         return;
+     }
+
+     const frequenciaAtualizado = {
          codigo,
          nome,
          treinos, 
@@ -107,7 +112,7 @@ function buscarcodigo() {
      };
 
      try {
-         const response = await fetch(`/frequencia/cpf/${frequencia}`, {
+         const response = await fetch(`/frequencia/codigo/${codigo}`, {
              method: 'PUT',
              headers: {
                  'Content-Type': 'application/json'
@@ -116,16 +121,21 @@ function buscarcodigo() {
          });
 
          if (response.ok) {
-             alert('frequencia atualizada com sucesso!');
+             alert('Frequência atualizada com sucesso!');
+             // Atualiza a tabela após alteração
+             consultarfrequencia();
+             // Limpa o formulário se desejar
+             limpaFormulario();
          } else {
              const errorMessage = await response.text();
-             alert('Erro ao atualizar frequencia: ' + errorMessage);
+             alert('Erro ao atualizar frequência: ' + errorMessage);
          }
      } catch (error) {
-         console.error('Erro ao atualizar frequencia:', error);
-         alert('Erro ao atualizar frequencia.');
+         console.error('Erro ao atualizar frequência:', error);
+         alert('Erro ao atualizar frequência. Verifique a conexão.');
      }
  }
+
  async function limpaFormulario() {
      document.getElementById('codigo').value ='';
      document.getElementById('nome').value = '';
@@ -133,3 +143,7 @@ function buscarcodigo() {
      document.getElementById('faltas').value = '';
      
  }
+
+function voltarpagina() {
+    window.location.href = 'escolha.html';
+}
