@@ -214,3 +214,8 @@ function limpaFormulario() {
 document.addEventListener('DOMContentLoaded', function() {
     consultarPlanos();
 });
+
+// Função para voltar
+function voltarpagina() {
+    window.location.href = 'escolha.html';
+}
