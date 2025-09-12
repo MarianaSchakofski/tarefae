@@ -1,5 +1,8 @@
 async function incluirCliente(event) {
     event.preventDefault();
+
+
+
     const cliente = {
         codigo: document.getElementById("codigo").value,
         nome: document.getElementById("nome").value,
@@ -80,14 +83,20 @@ async function consultarClientes() {
 }
 // Função para atualizar as informações do cliente
 async function alterarCliente() {
-    const codigo = document.getElementById('codigo').value;
-    const nome = document.getElementById('nome').value;
-    const idade = document.getElementById('idade').value;
-    const telefone = document.getElementById('telefone').value;
-    const emergencia = document.getElementById('emergencia').value;
-    const endereco = document.getElementById('endereco').value;
-    const email = document.getElementById('email').value;
-    const cpf = document.getElementById('cpf').value;
+    const codigo = document.getElementById('codigo').value.trim();
+    const nome = document.getElementById('nome').value.trim();
+    const idade = document.getElementById('idade').value.trim();
+    const telefone = document.getElementById('telefone').value.trim();
+    const emergencia = document.getElementById('emergencia').value.trim();
+    const endereco = document.getElementById('endereco').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const cpf = document.getElementById('cpf').value.trim();
+
+    // Validação básica
+    if (!codigo || !nome || !cpf) {
+        alert('Código, nome e CPF são obrigatórios para alteração!');
+        return;
+    }
 
     const clienteAtualizado = {
         codigo,
@@ -111,13 +120,15 @@ async function alterarCliente() {
 
         if (response.ok) {
             alert('Cliente atualizado com sucesso!');
+            // Atualiza a tabela após alteração
+            consultarClientes();
         } else {
             const errorMessage = await response.text();
             alert('Erro ao atualizar cliente: ' + errorMessage);
         }
     } catch (error) {
         console.error('Erro ao atualizar cliente:', error);
-        alert('Erro ao atualizar cliente.');
+        alert('Erro ao atualizar cliente. Verifique a conexão.');
     }
 }
 async function limpaFormulario() {
@@ -129,8 +140,4 @@ async function limpaFormulario() {
     document.getElementById('endereco').value = '';
     document.getElementById('email').value = '';
     document.getElementById('cpf').value = '';
-}
-// Função para voltar
-function voltarpagina() {
-    window.location.href = 'escolha.html';
 }
