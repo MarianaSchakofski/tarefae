@@ -141,3 +141,8 @@ async function limpaFormulario() {
     document.getElementById('email').value = '';
     document.getElementById('cpf').value = '';
 }
+
+// Função para voltar
+function voltarpagina() {
+    window.location.href = 'escolha.html';
+}
