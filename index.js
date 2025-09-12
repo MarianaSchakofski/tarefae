@@ -175,11 +175,16 @@ app.get("/clientes", (req, res) => {
 // Atualizar cliente
 app.put("/clientes/cpf/:cpf", (req, res) => {
     const { cpf } = req.params;
-    const { nome, email, telefone, endereco } = req.body;
+    const { codigo, nome, idade, telefone, emergencia, endereco, email } = req.body;
 
-    const query = `UPDATE clientes SET nome = ?, email = ?, telefone = ?, endereco = ? WHERE cpf = ?`;
-    db.run(query, [nome, email, telefone, endereco, cpf], function (err) {
+    if (!codigo || !nome) {
+        return res.status(400).send("Código e nome são obrigatórios.");
+    }
+
+    const query = `UPDATE clientes SET codigo = ?, nome = ?, idade = ?, telefone = ?, emergencia = ?, endereco = ?, email = ? WHERE cpf = ?`;
+    db.run(query, [codigo, nome, idade, telefone, emergencia, endereco, email, cpf], function (err) {
         if (err) {
+            console.error(err);
             return res.status(500).send("Erro ao atualizar cliente.");
         }
         if (this.changes === 0) {
@@ -507,54 +512,6 @@ app.put("/cargo/codigo/:codigo", (req, res) => {
             return res.status(404).send("Cargo não encontrado.");
         }
         res.send("Cargo atualizado com sucesso.");
-    });
-});
-
-// ==============================================
-// ROTAS PARA MOVIMENTO DO MÊS
-// ==============================================
-
-
-// Buscar cliente por código
-app.get("/clientes/codigo/:codigo", (req, res) => {
-    const { codigo } = req.params;
-    const query = `SELECT * FROM clientes WHERE codigo = ?`;
-
-    db.get(query, [codigo], (err, row) => {
-        if (err) {
-            return res.status(500).json({ message: "Erro ao buscar cliente." });
-        }
-        if (!row) {
-            return res.status(404).json({ message: "Cliente não encontrado." });
-        }
-        res.json(row);
-    });
-});
-
-// Buscar movimentos do mês
-app.get("/movimento/mes", (req, res) => {
-    const { codigo, mes, ano } = req.query;
-
-    if (!codigo || !mes || !ano) {
-        return res.status(400).json({ message: "Código, mês e ano são obrigatórios." });
-    }
-
-    const dataInicio = `${ano}-${mes.padStart(2, '0')}-01`;
-    const ultimoDia = new Date(ano, mes, 0).getDate();
-    const dataFim = `${ano}-${mes.padStart(2, '0')}-${ultimoDia}`;
-
-    const query = `
-        SELECT * FROM movimento 
-        WHERE codigo = ? 
-        AND date(data) BETWEEN ? AND ?
-        ORDER BY data, horarioE
-    `;
-
-    db.all(query, [codigo, dataInicio, dataFim], (err, rows) => {
-        if (err) {
-            return res.status(500).json({ message: "Erro ao buscar movimentos." });
-        }
-        res.json(rows);
     });
 });
 
