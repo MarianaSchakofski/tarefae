@@ -23,12 +23,18 @@
                         <label for="search">Pesquisar Cliente:</label>
                         <input type="text" id="search" placeholder="Digite o nome ou ID do cliente" autocomplete="off">
                     </div>
-                    <div class="container_botoes">
-                        <button type="submit" class="botao1">Pesquisar</button>
-                    </div>
                 </form>
             </div>
 
+                <div class="container_botoes">
+                    <button type="button" class="botao" onclick="Pesquisar()">Pesquisar</button>
+                    <button class="botao1" onclick="incluirfuncionario(event)">Incluir</button>
+                    <button class="botao2" onclick="voltarpagina()">Voltar</button>
+                    <button class="botao3" onclick="alterarfuncionario()">Alterar</button>
+                    <button class="botao4" onclick="consultarFuncionario()">Consultar</button>
+                    <button class="botao5" onclick="limpaFormulario()">Limpar</button>
+                 </div>
+                
             <div id="result-container" class="resposta-container" style="display: none;">
                 <!-- Os resultados serão exibidos aqui -->
             </div>
