@@ -17,25 +17,7 @@ async function incluirPagamento(event) {
     }
 
     try {
-        // Se você tiver uma API real, use este código:
-        /*
-        const response = await fetch('/pagamentos', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(novoPagamento)
-        });
-
-        if (response.ok) {
-            alert("Pagamento registrado com sucesso!");
-            document.getElementById("formPagamento").reset();
-            consultarPagamento(); // Atualiza a tabela
-        } else {
-            alert("Erro ao registrar pagamento.");
-        }
-        */
-
+      
         // Solução temporária (armazenamento local)
         pagamentos.push(novoPagamento);
         alert("Pagamento registrado com sucesso!");
