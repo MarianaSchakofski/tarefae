@@ -130,17 +130,16 @@ footer p {
   font-size: 14px;
 }
 
-.botao1 {
-  border-radius: 7px;
-  text-decoration: none;
-  border: none;
-  width: 120px;
-  height: 40px;
-  color: #ffffff;
-  background-color: #0e2133;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
+.botao, .botao1, .botao2, .botao3, .botao4, .botao5 {
+    border-radius: 7px;
+    border: none;
+    width: 120px; /* Mais largo */
+    height: 40px; /* Mais alto */
+    color: #ffffff;
+    background-color: #0e2133;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 .botao1:hover {
