@@ -1,8 +1,5 @@
 async function incluirCliente(event) {
     event.preventDefault();
-
-
-
     const cliente = {
         codigo: document.getElementById("codigo").value,
         nome: document.getElementById("nome").value,
@@ -36,19 +33,15 @@ async function incluirCliente(event) {
     }
 }
 
-
-
-
-
 // Função para listar todos os clientes ou buscar clientes por CPF
 async function consultarClientes() {
-    const cpf = document.getElementById('cpf').value.trim();  // Pega o valor do CPF digitado no input
+    const codigo = document.getElementById('codigo').value.trim();  // Pega o valor do CPF digitado no input
 
     let url = '/clientes';  // URL padrão para todos os clientes
 
-    if (cpf) {
+    if (codigo) {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
-        url += `?cpf=${cpf}`;
+        url += `?codigo=${codigo}`;
     }
 
     try {
@@ -110,7 +103,7 @@ async function alterarCliente() {
     };
 
     try {
-        const response = await fetch(`/clientes/cpf/${cpf}`, {
+        const response = await fetch(`/clientes/codigo/${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
