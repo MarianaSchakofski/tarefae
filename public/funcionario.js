@@ -59,11 +59,11 @@ function buscarcargo() {
 
 // Função para listar todos os funcionarios ou buscar funcionarios por CPF
 async function consultarFuncionario() {
-    const cpf = document.getElementById('cpf').value.trim();  // Pega o valor do CPF digitado no input
+    const codigo = document.getElementById('codigo').value.trim();  // Pega o valor do CPF digitado no input
 
     let url = '/funcionario';  // URL padrão para todos os funcionarios
 
-    if (cpf) {
+    if (codigo) {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
         url += `?cpf=${cpf}`;
     }
@@ -121,7 +121,7 @@ async function alterarfuncionario() {
     };
 
     try {
-        const response = await fetch(`/funcionario/cpf/${cpf}`, {
+        const response = await fetch(`/funcionario/codigo/${codigo}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
