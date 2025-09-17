@@ -25,7 +25,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
             id INTEGER primary key AUTOINCREMENT,
-            codigo VARCHAR(10),
+            codigo VARCHAR(10) NOT NULL UNIQUE,
             nome VARCHAR(100) NOT NULL,
             idade INTEGER,
             telefone VARCHAR(15),
@@ -39,7 +39,7 @@ db.serialize(() => {
     db.run(`
   CREATE TABLE if not exists funcionario (
     id INTEGER primary key AUTOINCREMENT,
-    codigo VARCHAR(10),
+    codigo VARCHAR(10) NOT NULL UNIQUE,
     nome VARCHAR(100) NOT NULL,
     cpf VARCHAR(14) NOT NULL UNIQUE,
     email VARCHAR(100),
@@ -76,7 +76,7 @@ db.serialize(() => {
     CREATE TABLE if not exists cargo (
         id integer PRIMARY KEY AUTOINCREMENT,
         codigo VARCHAR(10),
-        codigofun VARCHAR(6) NOT NULL,
+        codigofun VARCHAR(6) NOT NULL UNIQUE,
         funcao VARCHAR(100) NOT NULL
         )
         `);
@@ -84,7 +84,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS movimento (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            codigo VARCHAR(10) NOT NULL,
+            codigo VARCHAR(10) NOT NULL UNIQUE,
             horarioE VARCHAR(100) NOT NULL,
             horarioS VARCHAR(100),
             data DATE DEFAULT CURRENT_DATE
@@ -118,7 +118,7 @@ app.post("/clientes", (req, res) => {
     const { codigo, nome, idade, telefone, emergencia, endereco, email, cpf } =
         req.body;
 
-    if (!nome || !cpf) {
+    if (!nome || !codigo) {
         return res.status(400).send("Nome e CPF são obrigatórios.");
     }
 
@@ -141,13 +141,13 @@ app.post("/clientes", (req, res) => {
 // Listar clientes
 // Endpoint para listar todos os clientes ou buscar por CPF
 app.get("/clientes", (req, res) => {
-    const cpf = req.query.cpf || ""; // Recebe o CPF da query string (se houver)
+    const codigo = req.query.codigo || ""; // Recebe o CPF da query string (se houver)
 
-    if (cpf) {
+    if (codigo) {
         // Se CPF foi passado, busca clientes que possuam esse CPF ou parte dele
-        const query = `SELECT * FROM clientes WHERE cpf LIKE ?`;
+        const query = `SELECT * FROM clientes WHERE codigo LIKE ?`;
 
-        db.all(query, [`%${cpf}%`], (err, rows) => {
+        db.all(query, [`%${codigo}%`], (err, rows) => {
             if (err) {
                 console.error(err);
                 return res
@@ -173,15 +173,15 @@ app.get("/clientes", (req, res) => {
 });
 
 // Atualizar cliente
-app.put("/clientes/cpf/:cpf", (req, res) => {
-    const { cpf } = req.params;
-    const { codigo, nome, idade, telefone, emergencia, endereco, email } = req.body;
+app.put("/clientes/codigo/:codigo", (req, res) => {
+    const { codigo } = req.params;
+    const { nome, idade, telefone, emergencia, endereco, email, cpf } = req.body;
 
     if (!codigo || !nome) {
         return res.status(400).send("Código e nome são obrigatórios.");
     }
 
-    const query = `UPDATE clientes SET codigo = ?, nome = ?, idade = ?, telefone = ?, emergencia = ?, endereco = ?, email = ? WHERE cpf = ?`;
+    const query = `UPDATE clientes SET  nome = ?, idade = ?, telefone = ?, emergencia = ?, endereco = ?, email = ?, cpf = ?, WHERE codigo = ?`;
     db.run(query, [codigo, nome, idade, telefone, emergencia, endereco, email, cpf], function (err) {
         if (err) {
             console.error(err);
