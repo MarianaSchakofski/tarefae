@@ -65,7 +65,7 @@ async function consultarFuncionario() {
 
     if (codigo) {
         // Se CPF foi digitado, adiciona o parâmetro de consulta
-        url += `?cpf=${cpf}`;
+        url += `?codigo=${codigo}`;
     }
 
     try {
