@@ -82,13 +82,16 @@ db.serialize(() => {
         `);
     
     db.run(`
-        CREATE TABLE IF NOT EXISTS movimento (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            codigo VARCHAR(10) NOT NULL UNIQUE,
-            horarioE VARCHAR(100) NOT NULL,
-            horarioS VARCHAR(100),
-            data DATE DEFAULT CURRENT_DATE
-        )
+    CREATE TABLE IF NOT EXISTS movimento (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        codigo VARCHAR(10) NOT NULL,
+        nome VARCHAR(100) NOT NULL,
+        mes VARCHAR(7) NOT NULL,
+        treinos INTEGER DEFAULT 0,
+        faltas INTEGER DEFAULT 0,
+        valor DECIMAL(10,2) DEFAULT 0,
+        pago VARCHAR(3) DEFAULT 'Não'
+    )
     `);
 
 
@@ -622,6 +625,114 @@ app.delete("/planos_treino/codigo/:codigo", (req, res) => {
             return res.status(404).json({ message: "Plano de treino não encontrado." });
         }
         res.json({ message: "Plano de treino excluído com sucesso." });
+    });
+});
+
+
+///////////////////////////// Rotas para Movimento /////////////////////////////
+///////////////////////////// Rotas para Movimento /////////////////////////////
+///////////////////////////// Rotas para Movimento /////////////////////////////
+
+// Cadastrar movimento
+app.post("/movimento", (req, res) => {
+    const { codigo, nome, mes, treinos, faltas, valor, pago } = req.body;
+
+    if (!codigo || !nome || !mes) {
+        return res.status(400).send("Código, nome e mês são obrigatórios.");
+    }
+
+    const query = `INSERT INTO movimento (codigo, nome, mes, treinos, faltas, valor, pago) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    db.run(query, [codigo, nome, mes, treinos, faltas, valor, pago], function (err) {
+        if (err) {
+            return res.status(500).send("Erro ao cadastrar movimento.");
+        }
+        res.status(201).send({
+            id: this.lastID,
+            message: "Movimento cadastrado com sucesso.",
+        });
+    });
+});
+
+// Listar movimento - busca por código, nome ou mês
+app.get("/movimento", (req, res) => {
+    const search = req.query.search || "";
+    const mes = req.query.mes || "";
+
+    let query = `SELECT * FROM movimento WHERE 1=1`;
+    let params = [];
+
+    if (search) {
+        query += ` AND (codigo LIKE ? OR nome LIKE ?)`;
+        params.push(`%${search}%`, `%${search}%`);
+    }
+
+    if (mes) {
+        query += ` AND mes = ?`;
+        params.push(mes);
+    }
+
+    query += ` ORDER BY nome`;
+
+    db.all(query, params, (err, rows) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Erro ao buscar movimento." });
+        }
+        res.json(rows);
+    });
+});
+
+// Atualizar movimento
+app.put("/movimento/codigo/:codigo/mes/:mes", (req, res) => {
+    const { codigo, mes } = req.params;
+    const { treinos, faltas, valor, pago } = req.body;
+
+    const query = `UPDATE movimento SET treinos = ?, faltas = ?, valor = ?, pago = ? WHERE codigo = ? AND mes = ?`;
+    db.run(query, [treinos, faltas, valor, pago, codigo, mes], function (err) {
+        if (err) {
+            return res.status(500).send("Erro ao atualizar movimento.");
+        }
+        if (this.changes === 0) {
+            return res.status(404).send("Movimento não encontrado.");
+        }
+        res.send("Movimento atualizado com sucesso.");
+    });
+});
+
+// Buscar movimento completo (junção com clientes)
+app.get("/movimento/completo", (req, res) => {
+    const search = req.query.search || "";
+
+    if (!search) {
+        return res.status(400).send("Termo de pesquisa é obrigatório.");
+    }
+
+    const query = `
+        SELECT 
+            c.codigo, 
+            c.nome, 
+            c.idade, 
+            c.telefone, 
+            c.email,
+            c.cpf,
+            c.endereco,
+            m.mes,
+            m.treinos,
+            m.faltas,
+            m.valor,
+            m.pago
+        FROM clientes c
+        LEFT JOIN movimento m ON c.codigo = m.codigo
+        WHERE c.codigo LIKE ? OR c.nome LIKE ? OR c.cpf LIKE ?
+        ORDER BY c.nome
+    `;
+
+    db.all(query, [`%${search}%`, `%${search}%`, `%${search}%`], (err, rows) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ message: "Erro ao buscar movimento completo." });
+        }
+        res.json(rows);
     });
 });
 
