@@ -197,14 +197,11 @@ app.put("/clientes/codigo/:codigo", (req, res) => {
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
-
-
-// Cadastrar funcionario
 app.post('/funcionario', (req, res) => {
     const { codigo, nome, cpf, email, telefone, endereco, idade, cargo_id } = req.body;
 
-    if (!nome || !cpf) {
-        return res.status(400).send('Nome e CPF são obrigatórios.');
+    if (!codigo || !cpf) {
+        return res.status(400).send('codigo e CPF são obrigatórios.');
     }
 
     const query = `INSERT INTO funcionario (codigo, nome, cpf, email, telefone, endereco, idade, cargo_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
@@ -219,11 +216,11 @@ app.post('/funcionario', (req, res) => {
 // Listar funcionario
 // Endpoint para listar todos os funcionarios ou buscar por CPF
 app.get('/funcionario', (req, res) => {
-    const cpf = req.query.cpf || '';  // Recebe o CPF da query string (se houver)
+    const codigo = req.query.codigo || '';  // Recebe o CPF da query string (se houver)
 
-    if (cpf) {
+    if (codigo) {
         // Se CPF foi passado, busca funcionarios que possuam esse CPF ou parte dele
-        const query = `SELECT * FROM funcionario WHERE cpf LIKE ?`;
+        const query = `SELECT * FROM funcionario WHERE codigo LIKE ?`;
 
         db.all(query, [`%${cpf}%`], (err, rows) => {
             if (err) {
@@ -247,11 +244,11 @@ app.get('/funcionario', (req, res) => {
 });
 
 // Atualizar funcionario
-app.put('/funcionario/cpf/:cpf', (req, res) => {
-    const { cpf } = req.params;
-    const { codigo, nome, email, telefone, endereco, idade, cargo_id } = req.body;
+app.put('/funcionario/codigo/:codigo', (req, res) => {
+    const { codigo } = req.params;
+    const { nome, email, telefone, endereco, idade, cpf, cargo_id } = req.body;
 
-    const query = `UPDATE funcionario SET nome = ?, email = ?, telefone = ?, endereco = ?, idade = ?, cargo_id = ? WHERE cpf = ?`;
+    const query = `UPDATE funcionario SET nome = ?, email = ?, telefone = ?, endereco = ?, idade = ?, cargo_id = ? cpf = ?, WHERE codigo = ?`;
     db.run(query, [nome, email, telefone, endereco, idade, cargo_id, cpf], function (err) {
         if (err) {
             return res.status(500).send('Erro ao atualizar funcionario.');
@@ -274,6 +271,9 @@ app.get('/buscar-cargo', (req, res) => {
         }
     });
 });
+
+
+
 
 ///////////////////////////// Rotas para Pagamentos /////////////////////////////
 ///////////////////////////// Rotas para Pagamentos /////////////////////////////
