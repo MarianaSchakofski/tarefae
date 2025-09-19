@@ -1,13 +1,10 @@
 async function incluirfrequencia(event) {
      event.preventDefault();
-
-
-
      const frequencia = {
          codigo: document.getElementById("codigo").value,
          nome: document.getElementById("nome").value,
-         treinos: document.getElementById("treinos").value,
-         faltas: document.getElementById("faltas").value
+         horae: document.getElementById("horae").value,
+         horas: document.getElementById("horas").value
      };
 
      try {
@@ -81,8 +78,8 @@ function buscarcodigo() {
                  linha.innerHTML = `
                      <td>${frequencia.codigo}</td>
                      <td>${frequencia.nome}</td>
-                     <td>${frequencia.treinos}</td>
-                     <td>${frequencia.faltas}</td>
+                     <td>${frequencia.horae}</td>
+                     <td>${frequencia.horas}</td>
                  `;
                  tabela.appendChild(linha);
              });
@@ -95,8 +92,8 @@ function buscarcodigo() {
  async function alterarfrequencia() {
      const codigo = document.getElementById('codigo').value.trim();
      const nome = document.getElementById('nome').value.trim();
-     const treinos = document.getElementById('treinos').value.trim();
-     const faltas = document.getElementById('faltas').value.trim();
+     const treinos = document.getElementById('horae').value.trim();
+     const faltas = document.getElementById('horas').value.trim();
 
      // Validação básica
      if (!codigo || !nome) {
@@ -107,8 +104,8 @@ function buscarcodigo() {
      const frequenciaAtualizado = {
          codigo,
          nome,
-         treinos, 
-         faltas
+         horae, 
+         horas
      };
 
      try {
@@ -139,8 +136,8 @@ function buscarcodigo() {
  async function limpaFormulario() {
      document.getElementById('codigo').value ='';
      document.getElementById('nome').value = '';
-     document.getElementById('treinos').value = '';
-     document.getElementById('faltas').value = '';
+     document.getElementById('horae').value = '';
+     document.getElementById('horas').value = '';
      
  }
 
