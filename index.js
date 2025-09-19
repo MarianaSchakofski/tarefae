@@ -67,8 +67,8 @@ db.serialize(() => {
      id INTEGER PRIMARY KEY AUTOINCREMENT,
      codigo VARCHAR(10),
      nome VARCHAR(100) NOT NULL,
-     treinos INTEGER,
-     faltas INTEGER
+     horae INTEGER,
+     horas INTEGER
     )
     `);
 
@@ -361,19 +361,18 @@ app.put("/pagamentos/codigo/:codigo", (req, res) => {
  ////////////////////////////rotas para frequencia////////////////////////////////
  ////////////////////////////rotas para frequencia////////////////////////////////
 
-      // Cadastrar frequencia
-     app.post("/frequencia", (req, res) => {
-         const { codigo, nome, treinos, faltas } =
+       app.post("/frequencia", (req, res) => {
+         const { codigo, nome, horae, horas } =
              req.body;
 
          if (!nome || !codigo) {
-             return res.status(400).send("Nome e CPF são obrigatórios.");
+             return res.status(400).send("Nome e Codigo são obrigatórios.");
          }
 
-         const query = `INSERT INTO frequencia (codigo, nome, treinos, faltas) VALUES (?, ?, ?, ?)`;
+         const query = `INSERT INTO frequencia (codigo, nome, horae, horas) VALUES (?, ?, ?, ?)`;
          db.run(
              query,
-             [codigo, nome, treinos, faltas],
+             [codigo, nome, horae, horas],
              function (err) {
                  if (err) {
                      return res.status(500).send("Erro ao cadastrar cliente.");
@@ -423,10 +422,10 @@ app.put("/pagamentos/codigo/:codigo", (req, res) => {
      // Atualizar cliente
      app.put("/frequencia/codigo/:codigo", (req, res) => {
          const { codigo } = req.params;
-         const { nome, treinos, faltas } = req.body;
+         const { nome, horae, horas } = req.body;
 
-         const query = `UPDATE frequencia SET nome = ?, treinos = ?, faltas = ? WHERE codigo = ?`;
-         db.run(query, [nome, treinos, faltas, codigo], function (err) {
+         const query = `UPDATE frequencia SET nome = ?, horae = ?, horas = ? WHERE codigo = ?`;
+         db.run(query, [nome, horae, horas, codigo], function (err) {
              if (err) {
                  return res.status(500).send("Erro ao atualizar cliente.");
              }
@@ -436,6 +435,7 @@ app.put("/pagamentos/codigo/:codigo", (req, res) => {
              res.send("Cliente atualizado com sucesso.");
          });
      });
+
 
 ///////////////////////////// Rotas para Cargos /////////////////////////////
 ///////////////////////////// Rotas para Cargos /////////////////////////////
