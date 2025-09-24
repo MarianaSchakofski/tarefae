@@ -23,35 +23,36 @@ header {
 }
 
 header .logo h1 {
-    margin: 0;
-    padding: 10px;
+  margin: 0;
+  padding: 10px;
 }
 
 .logo {
-    width: 300px;
-    height: auto;
+  width: 300px;
+  height: auto;
 }
 
 .logo2 {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    left: 20px;
-    top: 20px;
+  width: 100px;
+  height: auto;
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }
 
 .logo3 {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    right: 20px;
-    top: 20px;
+  width: 100px;
+  height: auto;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .logo4 {
-    width: 200px;
-    height: auto;
+  width: 200px;
+  height: auto;
 }
+
 
 main {
     flex: 1;
@@ -234,3 +235,4 @@ table tr:hover {
         margin: 10px auto;
         display: block;
     }
+
