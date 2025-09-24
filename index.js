@@ -25,7 +25,7 @@ db.serialize(() => {
     db.run(`
         CREATE TABLE IF NOT EXISTS clientes (
             id INTEGER primary key AUTOINCREMENT,
-            codigo VARCHAR(10) NOT NULL UNIQUE,
+            codigo GENERATE AWAYS AS (id + 10000) STORED,
             nome VARCHAR(100) NOT NULL,
             idade INTEGER,
             telefone VARCHAR(15),
@@ -118,20 +118,20 @@ db.serialize(() => {
 
 // Cadastrar cliente
 app.post("/clientes", (req, res) => {
-    const { codigo, nome, idade, telefone, emergencia, endereco, email, cpf } =
+    const { nome, idade, telefone, emergencia, endereco, email, cpf } =
         req.body;
 
-    if (!nome || !codigo) {
-        return res.status(400).send("Nome e CPF são obrigatórios.");
-    }
+    //if (!nome || !codigo) {
+    //    return res.status(400).send("Nome e CPF são obrigatórios.");
+    //}
 
-    const query = `INSERT INTO clientes (codigo, nome, idade, telefone, emergencia, endereco, email, cpf) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO clientes (nome, idade, telefone, emergencia, endereco, email, cpf) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     db.run(
         query,
-        [codigo, nome, idade, telefone, emergencia, endereco, email, cpf],
+        [nome, idade, telefone, emergencia, endereco, email, cpf],
         function (err) {
             if (err) {
-                return res.status(500).send("Erro ao cadastrar cliente.");
+                return res.status(500).send("Erro ao cadastrar cliente!");
             }
             res.status(201).send({
                 id: this.lastID,
@@ -196,6 +196,7 @@ app.put("/clientes/codigo/:codigo", (req, res) => {
         res.send("Cliente atualizado com sucesso.");
     });
 });
+
 
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
