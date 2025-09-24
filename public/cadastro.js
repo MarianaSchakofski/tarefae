@@ -1,7 +1,7 @@
 async function incluirCliente(event) {
     event.preventDefault();
     const cliente = {
-        codigo: document.getElementById("codigo").value,
+        //codigo: document.getElementById("codigo").value,
         nome: document.getElementById("nome").value,
         idade: document.getElementById("idade").value,
         telefone: document.getElementById("telefone").value,
