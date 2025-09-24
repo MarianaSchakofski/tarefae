@@ -13,40 +13,35 @@ body {
     flex-direction: column;
 }
 
-header {
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    flex-wrap: wrap;
-}
-
 header .logo h1 {
-    margin: 0;
-    padding: 10px;
+  margin: 0;
+  padding: 10px;
 }
 
 .logo {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
+  width: 300px;
+  height: auto;
 }
 
-.logo2, .logo3 {
-    width: 100%;
-    max-width: 65px;
-    height: auto;
-    position: static;
-    margin: 10px;
+.logo2 {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+.logo3 {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .logo4 {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
+  width: 200px;
+  height: auto;
 }
 
 nav {
