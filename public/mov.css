@@ -57,7 +57,14 @@ header .logo h1 {
   width: 200px;
   height: auto;
 }
-
+nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    background-color: #0e2133;
+    flex-wrap: wrap;
+}
 main {
   flex: 1;
   display: flex;
