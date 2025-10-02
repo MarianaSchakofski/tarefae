@@ -14,33 +14,38 @@
         <img class="logo3" src="imagens/parana.png">
     </header>
 
-        <nav>
+    <nav>
 
-        </nav>
-<main>
+    </nav>
 
-    <section id="login">
-        <h2>Senha para Pagamento</h2>
-        <form class="box" action="">
-            <div class="form-group">
-                <br>
-                <label for="nome">Nome</label>
-                <input type="text" name="primeiro_nome" id="nome" placeholder="Nome">
-            </div>
-            <div>
-                <br>
-                <label for="senha">Senha</label>
-                <input type="text" name="Senha" id="Senha" placeholder="Senha">
-            </div>
-            <a href="pagamento.html" class="botao">Entrar</a>
-    </section>
+    <main>
+        <section id="login">
+            <h2>Senha para Pagamento</h2>
+            <form class="box" id="loginForm">
+                <div class="form-group">
+                    <br>
+                    <label for="nome">Nome</label>
+                    <input type="text" name="primeiro_nome" id="nome" placeholder="Nome" required>
+                </div>
+                <div>
+                    <br>
+                    <label for="senha">Senha</label>
+                    <input type="password" name="Senha" id="Senha" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="botao">Entrar</button>
+                <div id="mensagemErro" style="color: red; margin-top: 10px; display: none;">
+                    Senha incorreta! Tente novamente.
+                </div>
+            </form>
+        </section>
+    </main>
 
-</main>
+    <footer>
+        <img class="logo4" src="imagens/gimc2.png">
+        <p>2025-todos os direitos reservados</p>
+    </footer>
 
-<footer>
-    <img class="logo4" src="imagens/gimc2.png">
-    <p>2025-todos os direitos reservados</p>
-</footer>
+    <script src="senha.js"></script>
 
 </body>
 </html>
