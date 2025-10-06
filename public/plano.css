@@ -54,7 +54,7 @@ main {
   margin: 30px auto;
   max-width: 1000px;
   padding: 20px;
-  background-color: white;
+  background-color:  #acccdc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -103,18 +103,24 @@ footer p {
 }
 
 nav {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    background-color: #0e2133;
-    flex-wrap: wrap;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0e2133;
+  flex-wrap: wrap;
 }
 
 nav a {
-  margin: 0 15px;
+  margin: 0 20px;
   color: #f9f9f9;
   text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #4a90e2;
 }
 
 .botao1, .botao2, .botao3, .botao4, .botao5 {
