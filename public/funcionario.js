@@ -89,7 +89,7 @@ async function consultarFuncionario() {
                     <td>${funcionario.telefone}</td>
                     <td>${funcionario.endereco}</td>
                     <td>${funcionario.idade}</td>
-                    <td>${funcionario.cargo}</td>
+                    <td>${funcionario.cargo_id}</td>
                 `;
                 tabela.appendChild(linha);
             });
@@ -107,7 +107,7 @@ async function alterarfuncionario() {
         const telefone = document.getElementById("telefone").value;
         const endereco = document.getElementById("endereco").value;
         const idade = document.getElementById("idade").value;
-        const cargo = document.getElementById("cargo").value;
+        const cargo_id = document.getElementById("cargo_id").value
 
     const funcionarioAtualizado = {
         codigo,
@@ -117,7 +117,7 @@ async function alterarfuncionario() {
         telefone,
         endereco,
         idade,
-        cargo
+        cargo_id
     };
 
     try {
@@ -148,7 +148,7 @@ async function limpaFormulario() {
     document.getElementById('telefone').value = '';
     document.getElementById('endereco').value = '';
     document.getElementById('idade').value = '';
-    document.getElementById('cargo').value = '';
+    document.getElementById('cargo_id').value = '';
 }
 
 // Função para abrir a página de cargo
