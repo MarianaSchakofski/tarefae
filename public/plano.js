@@ -1,4 +1,4 @@
-console.log("✅ plano.js CARREGADO com sucesso!");
+console.log("plano.js CARREGADO com sucesso!");
 
 
 // FUNÇÃO PRINCIPAL - INCLUIR PLANO
@@ -73,9 +73,8 @@ async function incluirPlano(event) {
     return false;
 }
 
-// =============================================
-// FUNÇÃO PARA SALVAR PLANO (LocalStorage + Servidor)
-// =============================================
+
+// FUNÇÃO PARA SALVAR PLANO 
 async function salvarPlano(plano) {
     console.log(" Salvando plano...");
 
@@ -105,9 +104,8 @@ async function salvarPlano(plano) {
     }
 }
 
-// =============================================
+
 // FUNÇÃO PARA SALVAR NO LOCALSTORAGE
-// =============================================
 function salvarNoLocalStorage(plano) {
     try {
         let planos = JSON.parse(localStorage.getItem('planosTreino')) || [];
@@ -132,9 +130,8 @@ function salvarNoLocalStorage(plano) {
     }
 }
 
-// =============================================
+
 // FUNÇÃO CONSULTAR PLANOS
-// =============================================
 async function consultarPlanos() {
     console.log(" CONSULTAR PLANOS - Função executada!");
 
@@ -176,9 +173,8 @@ async function consultarPlanos() {
     }
 }
 
-// =============================================
+
 // FUNÇÃO EXIBIR PLANOS NA TELA
-// =============================================
 function exibirPlanos(planos, container) {
     container.innerHTML = '';
 
@@ -215,10 +211,7 @@ function exibirPlanos(planos, container) {
         container.appendChild(planoCard);
     });
 }
-
-// =============================================
 // FUNÇÃO FORMATAR EXERCÍCIOS
-// =============================================
 function formatarExercicios(exercicios) {
     if (!exercicios) return '<p>Nenhum exercício cadastrado.</p>';
 
@@ -233,9 +226,8 @@ function formatarExercicios(exercicios) {
     `).join('');
 }
 
-// =============================================
+
 // FUNÇÃO ALTERAR PLANO
-// =============================================
 async function alterarPlano() {
     console.log(" ALTERAR PLANO - Função executada!");
 
@@ -267,9 +259,8 @@ async function alterarPlano() {
     console.log(" Formulário preenchido para edição");
 }
 
-// =============================================
+
 // FUNÇÃO EDITAR PLANO (botão na lista)
-// =============================================
 function editarPlano(codigo) {
     console.log(" EDITAR PLANO:", codigo);
 
@@ -288,9 +279,8 @@ function editarPlano(codigo) {
     }
 }
 
-// =============================================
+
 // FUNÇÃO EXCLUIR PLANO
-// =============================================
 function excluirPlano(codigo) {
     console.log(" EXCLUIR PLANO:", codigo);
 
@@ -306,9 +296,7 @@ function excluirPlano(codigo) {
     }
 }
 
-// =============================================
 // FUNÇÃO LIMPAR FORMULÁRIO
-// =============================================
 function limpaFormulario() {
     console.log(" LIMPAR FORMULÁRIO - Função executada!");
 
@@ -318,9 +306,8 @@ function limpaFormulario() {
     }
 }
 
-// =============================================
+
 // FUNÇÃO VOLTAR
-// =============================================
 function voltarpagina() {
     console.log(" VOLTAR - Função executada!");
 
@@ -329,9 +316,8 @@ function voltarpagina() {
     }
 }
 
-// =============================================
+
 // INICIALIZAÇÃO DA PÁGINA
-// =============================================
 document.addEventListener('DOMContentLoaded', function() {
     console.log(" Página totalmente carregada!");
     console.log(" Elementos encontrados:");
@@ -344,9 +330,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(` ${planosSalvos.length} plano(s) salvo(s) no localStorage`);
 });
 
-// =============================================
 // ESTILOS DINÂMICOS (opcional)
-// =============================================
 const dynamicStyles = `
     .sem-resultados {
         text-align: center;
