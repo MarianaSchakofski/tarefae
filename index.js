@@ -47,7 +47,7 @@ db.serialize(() => {
     telefone VARCHAR(15),
     idade INTEGER,
     cargo_id INTEGER,
-    FOREIGN KEY (cargo_id) REFERENCES cargo (id)
+    FOREIGN KEY (cargo_id) REFERENCES cargo_id (id)
   )
   `);
 
@@ -266,7 +266,7 @@ app.put('/funcionario/codigo/:codigo', (req, res) => {
     
 // ROTA PARA BUSCAR TODOS OS CARGOS PARA CADASTRAR O Funcionario
 app.get('/buscar-cargo', (req, res) => {
-    db.all("SELECT id, funcao FROM cargo", [], (err, rows) => {
+    db.all("SELECT funcao, funcao FROM cargo", [], (err, rows) => {
         if (err) {
             console.error('Erro ao buscar serviços:', err);
             res.status(500).send('Erro ao buscar serviços');
