@@ -218,51 +218,97 @@ app.post('/funcionario', (req, res) => {
 });
 
 // Listar funcionario
-// Endpoint para listar todos os funcionarios ou buscar por CPF
+// Endpoint para listar todos os funcionarios ou buscar por CÓDIGO - CORRIGIDO
 app.get('/funcionario', (req, res) => {
-    const codigo = req.query.codigo || '';  // Recebe o CPF da query string (se houver)
+    const codigo = req.query.codigo || '';
+
+    console.log('Consultando funcionários. Código:', codigo);
 
     if (codigo) {
-        // Se CPF foi passado, busca funcionarios que possuam esse CPF ou parte dele
-        const query = `SELECT * FROM funcionario WHERE codigo LIKE ?`;
+        // Busca específica por código
+        const query = `SELECT * FROM funcionario WHERE codigo = ?`;
 
-        db.all(query, [`%${cpf}%`], (err, rows) => {
+        db.all(query, [codigo], (err, rows) => {
             if (err) {
-                console.error(err);
+                console.error('Erro na busca por código:', err);
                 return res.status(500).json({ message: 'Erro ao buscar funcionarios.' });
             }
-            res.json(rows);  // Retorna os funcionarios encontrados ou um array vazio
+            console.log('Resultado da busca:', rows);
+            res.json(rows);
         });
     } else {
-        // Se CPF não foi passado, retorna todos os funcionarios
+        // Retorna todos os funcionarios
         const query = `SELECT * FROM funcionario`;
 
         db.all(query, (err, rows) => {
             if (err) {
-                console.error(err);
+                console.error('Erro na busca geral:', err);
                 return res.status(500).json({ message: 'Erro ao buscar funcionarios.' });
             }
-            res.json(rows);  // Retorna todos os funcionarios
+            res.json(rows);
         });
     }
 });
 
-// Atualizar funcionario
+// Atualizar funcionario - ROTA CORRIGIDA
+// Atualizar funcionario - ROTA COMPLETAMENTE REVISADA
 app.put('/funcionario/codigo/:codigo', (req, res) => {
     const { codigo } = req.params;
-    const { nome, email, telefone, endereco, idade, cpf, cargo_id } = req.body;
+    const { nome, cpf, email, telefone, endereco, idade, cargo_id } = req.body;
 
-    const query = `UPDATE funcionario SET nome = ?, email = ?, telefone = ?, endereco = ?, idade = ?, cargo_id = ? cpf = ?, WHERE codigo = ?`;
-    db.run(query, [nome, email, telefone, endereco, idade, cargo_id, cpf], function (err) {
+    console.log('Recebendo atualização para código:', codigo);
+    console.log('Dados recebidos:', req.body);
+
+    // Validações
+    if (!codigo) {
+        return res.status(400).send('Código é obrigatório.');
+    }
+
+    if (!nome || !cpf) {
+        return res.status(400).send('Nome e CPF são obrigatórios.');
+    }
+
+    // Primeiro, verificar se o funcionário existe
+    const checkQuery = `SELECT * FROM funcionario WHERE codigo = ?`;
+
+    db.get(checkQuery, [codigo], (err, row) => {
         if (err) {
-            return res.status(500).send('Erro ao atualizar funcionario.');
+            console.error('Erro ao verificar funcionário:', err);
+            return res.status(500).send('Erro interno do servidor.');
         }
-        if (this.changes === 0) {
-            return res.status(404).send('Funcionario não encontrado.');
+
+        if (!row) {
+            return res.status(404).send('Funcionário não encontrado.');
         }
-        res.send('Funcionario atualizado com sucesso.');
+
+        // Agora fazer o UPDATE
+        const updateQuery = `UPDATE funcionario 
+                            SET nome = ?, cpf = ?, email = ?, telefone = ?, 
+                                endereco = ?, idade = ?, cargo_id = ? 
+                            WHERE codigo = ?`;
+
+        console.log('Executando query:', updateQuery);
+        console.log('Com parâmetros:', [nome, cpf, email, telefone, endereco, idade, cargo_id, codigo]);
+
+        db.run(updateQuery, [nome, cpf, email, telefone, endereco, idade, cargo_id, codigo], function (err) {
+            if (err) {
+                console.error('Erro no UPDATE:', err);
+                if (err.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+                    return res.status(400).send('CPF já existe para outro funcionário.');
+                }
+                return res.status(500).send('Erro ao atualizar funcionário no banco de dados.');
+            }
+
+            console.log('Update realizado. Changes:', this.changes);
+
+            if (this.changes === 0) {
+                return res.status(404).send('Nenhum funcionário foi atualizado.');
+            }
+
+            res.send('Funcionario atualizado com sucesso.');
+        });
     });
-    });
+});
     
 // ROTA PARA BUSCAR TODOS OS CARGOS PARA CADASTRAR O Funcionario
 app.get('/buscar-cargo', (req, res) => {
