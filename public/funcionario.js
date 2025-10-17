@@ -58,28 +58,33 @@ function buscarcargo() {
 
 
 // Função para listar todos os funcionarios ou buscar funcionarios por CPF
+// Função para listar todos os funcionarios ou buscar funcionarios por CÓDIGO
 async function consultarFuncionario() {
-    const codigo = document.getElementById('codigo').value.trim();  // Pega o valor do CPF digitado no input
+    const codigo = document.getElementById('codigo').value.trim();
 
-    let url = '/funcionario';  // URL padrão para todos os funcionarios
-
+    let url = '/funcionario';
     if (codigo) {
-        // Se CPF foi digitado, adiciona o parâmetro de consulta
         url += `?codigo=${codigo}`;
     }
 
+    console.log('Fazendo consulta para URL:', url);
+
     try {
         const response = await fetch(url);
-        const funcionario = await response.json();
+        if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+        }
+
+        const funcionarios = await response.json();
+        console.log('Funcionários recebidos:', funcionarios);
 
         const tabela = document.getElementById('tabela-funcionario');
-        tabela.innerHTML = ''; // Limpa a tabela antes de preencher
+        tabela.innerHTML = '';
 
-        if (funcionario.length === 0) {
-            // Caso não encontre funcionario, exibe uma mensagem
-            tabela.innerHTML = '<tr><td colspan="6">Nenhum funcionario encontrado.</td></tr>';
+        if (funcionarios.length === 0) {
+            tabela.innerHTML = '<tr><td colspan="8">Nenhum funcionario encontrado.</td></tr>';
         } else {
-            funcionario.forEach(funcionario => {
+            funcionarios.forEach(funcionario => {
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
                     <td>${funcionario.codigo}</td>
@@ -96,10 +101,14 @@ async function consultarFuncionario() {
         }
     } catch (error) {
         console.error('Erro ao listar funcionarios:', error);
+        alert('Erro ao consultar funcionários: ' + error.message);
     }
 }
 // Função para atualizar as informações do funcionario
+
+// Função para atualizar as informações do funcionario - VERSÃO DEBUG
 async function alterarfuncionario() {
+    try {
         const codigo = document.getElementById("codigo").value;
         const nome = document.getElementById("nome").value;
         const cpf = document.getElementById("cpf").value;
@@ -107,20 +116,30 @@ async function alterarfuncionario() {
         const telefone = document.getElementById("telefone").value;
         const endereco = document.getElementById("endereco").value;
         const idade = document.getElementById("idade").value;
-        const cargo_id = document.getElementById("cargo_id").value
+        const cargo_id = document.getElementById("cargoselecionado").value;
 
-    const funcionarioAtualizado = {
-        codigo,
-        nome,
-        cpf, 
-        email,
-        telefone,
-        endereco,
-        idade,
-        cargo_id
-    };
+        console.log('Dados para alteração:', {
+            codigo, nome, cpf, email, telefone, endereco, idade, cargo_id
+        });
 
-    try {
+        if (!codigo) {
+            alert('Por favor, informe o código do funcionário para alterar.');
+            return;
+        }
+
+        const funcionarioAtualizado = {
+            codigo: codigo,
+            nome: nome,
+            cpf: cpf, 
+            email: email,
+            telefone: telefone,
+            endereco: endereco,
+            idade: idade,
+            cargo_id: parseInt(cargo_id)
+        };
+
+        console.log('Enviando para API:', funcionarioAtualizado);
+
         const response = await fetch(`/funcionario/codigo/${codigo}`, {
             method: 'PUT',
             headers: {
@@ -129,28 +148,34 @@ async function alterarfuncionario() {
             body: JSON.stringify(funcionarioAtualizado)
         });
 
+        console.log('Status da resposta:', response.status);
+
+        const responseText = await response.text();
+        console.log('Resposta do servidor:', responseText);
+
         if (response.ok) {
             alert('Funcionario atualizado com sucesso!');
+            consultarFuncionario(); // Atualiza a tabela
         } else {
-            const errorMessage = await response.text();
-            alert('Erro ao atualizar funcionario: ' + errorMessage);
+            alert('Erro ao atualizar funcionario: ' + responseText);
         }
     } catch (error) {
-        console.error('Erro ao atualizar funcionario:', error);
-        alert('Erro ao atualizar funcionario.');
+        console.error('Erro completo:', error);
+        alert('Erro ao atualizar funcionario: ' + error.message);
     }
 }
+
+// Função limpaFormulario também corrigida:
 async function limpaFormulario() {
-    document.getElementById('codigo').value ='';
+    document.getElementById('codigo').value = '';
     document.getElementById('nome').value = '';
     document.getElementById('cpf').value = '';
     document.getElementById('email').value = '';
     document.getElementById('telefone').value = '';
     document.getElementById('endereco').value = '';
     document.getElementById('idade').value = '';
-    document.getElementById('cargo_id').value = '';
+    document.getElementById('cargoselecionado').value = ''; // CORREÇÃO AQUI
 }
-
 // Função para abrir a página de cargo
 function abrirCargo() {
     window.open('cargo.html', '_blank');
