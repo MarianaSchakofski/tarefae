@@ -1,239 +1,195 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #acccdc;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #acccdc;
+  color: #333;
 }
 
 header {
-    background-color: #f9f9f9;
-    color: #333;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 0px;
+  align-items: center;
+  text-align: center;
+  position: relative;
 }
 
 header .logo h1 {
-    margin: 0;
-    padding: 10px;
+  margin: 0;
+  padding: 10px;
 }
 
 .logo {
-    width: 300px;
-    height: auto;
+  width: 300px;
+  height: auto;
 }
 
 .logo2 {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    left: 20px;
-    top: 20px;
+  width: 100px;
+  height: auto;
+  position: absolute;
+  left: 20px;
+  top: 20px;
 }
 
 .logo3 {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    right: 20px;
-    top: 20px;
+  width: 100px;
+  height: auto;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .logo4 {
-    width: 200px;
-    height: auto;
+  width: 200px;
+  height: auto;
 }
 
 main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+  margin: 30px auto;
+  max-width: 1000px;
+  padding: 20px;
+  background-color:  #acccdc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-section {
-    margin: 20px auto;
-    width: 90%;
-    max-width: 900px; /* Mais largo */
-    padding: 25px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.12);
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 15px;
 }
 
-.form-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    max-width: 800px; /* Mais largo */
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.form-group {
+  flex: 1;
+  min-width: 200px;
 }
 
 form label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    text-align: left;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-form input, form textarea, form select {
-    width: 100%;
-    padding: 14px;
-    font-size: 16px;
-    border: 1px solid #0e2133;
-    border-radius: 6px;
-    background-color: #f9f9f9;
-    transition: border-color 0.3s;
+form input, form select, form textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #0e2133;
+  border-radius: 5px;
 }
 
-form input:focus, form textarea:focus, form select:focus {
-    border-color: #4a90e2;
-    outline: none;
-    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
-}
-
-textarea {
-    min-height: 120px;
-    resize: vertical;
+form textarea {
+  height: 100px;
+  resize: vertical;
 }
 
 footer {
-    text-align: center;
-    background-color: #0e2133;
-    color: #f9f9f9;
-    padding: 30px;
-    width: 100%;
+  text-align: center;
+  background-color: #0e2133;
+  color: #f9f9f9;
+  padding: 40px;
+  margin-top: 40px;
 }
 
 footer p {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 nav {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    background-color: #0e2133;
-    flex-wrap: wrap;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background-color: #0e2133;
+  flex-wrap: wrap;
 }
 
 nav a {
-    margin: 0 20px;
-    color: #f9f9f9;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
+  margin: 0 20px;
+  color: #f9f9f9;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #4a90e2;
+  color: #4a90e2;
 }
 
 .botao1, .botao2, .botao3, .botao4, .botao5 {
-    border-radius: 7px;
-    text-decoration: none;
-    border: none;
-    width: 120px; /* Mais largo */
-    height: 40px; /* Mais alto */
-    color: #ffffff;
-    background-color: #0e2133;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.botao1:hover, .botao2:hover, .botao3:hover, .botao4:hover, .botao5:hover {
-    background-color: #4a90e2;
+  border-radius: 7px;
+  margin-top: 10px;
+  border: none;
+  width: 120px;
+  height: 35px;
+  color: #ffffff;
+  background-color: #0e2133;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .container_botoes {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 25px;
-    gap: 15px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
+.plano-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 14px;
-    text-align: left;
+.plano-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+.plano-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0e2133;
 }
 
-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+.plano-actions button {
+  background-color: #0e2133;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
 }
 
-table tr:hover {
-    background-color: #f0f7ff;
+.exercicio-item {
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  border-left: 4px solid #0e2133;
 }
 
-.resposta-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 30px;
+.categoria-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 15px 0 10px 0;
+  color: #0e2133;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
 }
-
-.caixa-resposta {
-    width: 100%;
-    padding: 20px;
-    background-color: #f0f7ff;
-    border: 1px solid #c5e1ff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.caixa-resposta h3 {
-    color: #0e2133;
-    margin-bottom: 30px;
-}
-
-.caixa-resposta p {
-    line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-    .logo2, .logo3 {
-        position: relative;
-        left: auto;
-        right: auto;
-        top: auto;
-        margin: 10px auto;
-        display: block;
-    }
-}
-
