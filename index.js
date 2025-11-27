@@ -184,8 +184,8 @@ app.put("/clientes/codigo/:codigo", (req, res) => {
         return res.status(400).send("Código e nome são obrigatórios.");
     }
 
-    const query = `UPDATE clientes SET  nome = ?, idade = ?, telefone = ?, emergencia = ?, endereco = ?, email = ?, cpf = ?, WHERE codigo = ?`;
-    db.run(query, [codigo, nome, idade, telefone, emergencia, endereco, email, cpf], function (err) {
+    const query = `UPDATE clientes SET  nome = ?, idade = ?, telefone = ?, emergencia = ?, endereco = ?, email = ?, cpf = ? WHERE codigo = ?`;
+    db.run(query, [nome, idade, telefone, emergencia, endereco, email, cpf, codigo], function (err) {
         if (err) {
             console.error(err);
             return res.status(500).send("Erro ao atualizar cliente.");
