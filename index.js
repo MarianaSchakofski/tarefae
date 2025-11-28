@@ -201,6 +201,7 @@ app.put("/clientes/codigo/:codigo", (req, res) => {
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
 ///////////////////////////// Rotas para Funcionario /////////////////////////////
+
 app.post('/funcionario', (req, res) => {
     const { codigo, nome, cpf, email, telefone, endereco, idade, cargo_id } = req.body;
 
@@ -309,10 +310,10 @@ app.put('/funcionario/codigo/:codigo', (req, res) => {
         });
     });
 });
-    
+
 // ROTA PARA BUSCAR TODOS OS CARGOS PARA CADASTRAR O Funcionario
 app.get('/buscar-cargo', (req, res) => {
-    db.all("SELECT funcao, funcao FROM cargo", [], (err, rows) => {
+    db.all("SELECT id, funcao FROM cargo", [], (err, rows) => {
         if (err) {
             console.error('Erro ao buscar serviços:', err);
             res.status(500).send('Erro ao buscar serviços');
@@ -321,8 +322,6 @@ app.get('/buscar-cargo', (req, res) => {
         }
     });
 });
-
-
 
 
 ///////////////////////////// Rotas para Pagamentos /////////////////////////////
